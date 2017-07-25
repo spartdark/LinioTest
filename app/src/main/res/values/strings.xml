@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">Favorites</string>
+    <string name="app_name">Favoritos</string>
     <string name="action_settings">Settings</string>
+
+    <string name="all_favorites">Todos mis favoritos</string>
+    <string name="url">https://gist.githubusercontent.com/la-ursic/3c5f25d5ee955ee9a6e493ac57884b9c/raw/5fab9af8e1f4db60419ba3a8da9f138cbb3a8461/Wish%2520lists</string>
 </resources>

@@ -4,7 +4,8 @@
     tools:context="com.spartdark.favorites.MainActivity">
     <item
         android:id="@+id/action_settings"
+        android:icon="@mipmap/nd_ic_add_collection_white_32"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>
