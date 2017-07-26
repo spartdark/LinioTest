@@ -1,21 +1,46 @@
 package com.spartdark.favorites.dto;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by spartdark on 24/07/17.
  */
 
 public class Products {
 
+    @SerializedName("id")
+    @Expose
     private int id;
+    @SerializedName("namename")
+    @Expose
     private String namename;
+    @SerializedName("wishListPrice")
+    @Expose
     private int wishListPrice;
+    @SerializedName("slug")
+    @Expose
     private String slug;
+    @SerializedName("url")
+    @Expose
     private String url;
+    @SerializedName("image")
+    @Expose
     private String image;
+    @SerializedName("linioPlusLevel")
+    @Expose
     private int linioPlusLevel;
+    @SerializedName("conditionType")
+    @Expose
     private String conditionType;
+    @SerializedName("freeShipping")
+    @Expose
     private boolean freeShipping;
+    @SerializedName("imported")
+    @Expose
     private boolean imported;
+    @SerializedName("active")
+    @Expose
     private boolean active;
 
 

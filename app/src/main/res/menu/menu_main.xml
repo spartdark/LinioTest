@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.spartdark.favorites.MainActivity">
+    tools:context="com.spartdark.favorites.ui.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:icon="@mipmap/nd_ic_add_collection_white_32"
