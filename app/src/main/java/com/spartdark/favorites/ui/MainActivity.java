@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     private RecyclerView recyclerView;
     private AllFavoritesAdapter allFavoritesAdapter;
-    private List<Products> productses;
+    private TextView textViewNumberFavorites;
 
     public static void initImageLoader(Context context) {
         // This configuration tuning is custom. You can tune every option, you may tune some of them,
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_allfavorites);
+        textViewNumberFavorites = (TextView) findViewById(R.id.textViewNumberFavorites);
         activateDisp();
     }
 
@@ -105,10 +107,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, response);
                 String finalResponse = "{fav:" + response.toString() + "}";
                 MyResponse activateResponse = gson.fromJson(finalResponse, MyResponse.class);
-                if (!activateResponse.getFav().isEmpty()) {
+                if (activateResponse != null && !activateResponse.getFav().isEmpty()) {
                     for (MyFavorites myFavorite : activateResponse.getFav()) {
                         List<Products> productsList = new ArrayList<Products>(myFavorite.getProducts().values());
                         Log.i(TAG, "Tamaño de mis productos" + productsList.size());
+                        textViewNumberFavorites.setText(String.valueOf(productsList.size()));
                         allFavoritesAdapter = new AllFavoritesAdapter(productsList);
                         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
                         recyclerView.setLayoutManager(mLayoutManager);
