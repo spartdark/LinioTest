@@ -76,8 +76,6 @@ public class AllFavoritesAdapter extends RecyclerView.Adapter<AllFavoritesAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public ImageView textViewTransactionName_atran;
-
-
         public ViewHolder(View rootView) {
             super(rootView);
             textViewTransactionName_atran = (ImageView) rootView.findViewById(R.id.imageViewProduct);

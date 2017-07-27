@@ -36,6 +36,7 @@ import com.spartdark.favorites.dto.MyFavorites;
 import com.spartdark.favorites.dto.MyResponse;
 import com.spartdark.favorites.dto.Products;
 import com.spartdark.favorites.util.GridSpacingItemDecoration;
+import com.spartdark.favorites.util.Validations;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,18 +51,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewNumberFavorites;
 
     public static void initImageLoader(Context context) {
-        // This configuration tuning is custom. You can tune every option, you may tune some of them,
-        // or you can create default configuration by
-        //  ImageLoaderConfiguration.createDefault(this);
-        // method.
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
         config.threadPriority(Thread.NORM_PRIORITY - 2);
         config.denyCacheImageMultipleSizesInMemory();
         config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
-        //config.imageDownloader(new URLConnectionImageDownloader(5 * 1000, 20 * 1000);
         config.diskCacheSize(50 * 1024 * 1024); // 50 MiB
         config.tasksProcessingOrder(QueueProcessingType.LIFO);
-        config.writeDebugLogs(); // Remove for release app
+        config.writeDebugLogs();
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
     }
@@ -75,7 +71,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_allfavorites);
         textViewNumberFavorites = (TextView) findViewById(R.id.textViewNumberFavorites);
-        activateDisp();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (new Validations().isNetworkAvailable(this)) {
+            getFav();
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.no_internet_connection, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -91,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -100,11 +105,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void activateDisp() {
+    private void getFav() {
         StringRequest stringRequest = new StringRequest(getString(R.string.url), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i(TAG, response);
+                Log.d(TAG, response);
                 String finalResponse = "{fav:" + response.toString() + "}";
                 MyResponse activateResponse = gson.fromJson(finalResponse, MyResponse.class);
                 if (activateResponse != null && !activateResponse.getFav().isEmpty()) {

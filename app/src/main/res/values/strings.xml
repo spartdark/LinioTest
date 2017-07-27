@@ -5,4 +5,5 @@
     <string name="all_favorites">Todos mis favoritos</string>
     <string name="url">https://gist.githubusercontent.com/la-ursic/3c5f25d5ee955ee9a6e493ac57884b9c/raw/5fab9af8e1f4db60419ba3a8da9f138cbb3a8461/Wish%2520lists</string>
     <string name="no_favorites">Sin favoritos</string>
+    <string name="no_internet_connection">Sin conexión a internet</string>
 </resources>
